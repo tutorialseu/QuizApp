@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/purple_500"
+                android:background="@color/colorPrimary"
                 android:text="Start"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
