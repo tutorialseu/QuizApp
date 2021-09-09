@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 
 class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
+    //Todo creating global variables for the views in the layout
     private var progressBar:ProgressBar?=null
     private var tvProgress: TextView? = null
     private var tvQuestion:TextView? = null
@@ -20,7 +21,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var tvOptionFour:TextView? = null
    private var buttonSubmit:Button? = null
 
-    // TODO (STEP 2: A global variables for current position and questions list.)
+    // TODO A global variables for current position and questions list
     // START
     private var mCurrentPosition: Int = 1 // Default and the first question position
     private var mQuestionsList: ArrayList<Question>? = null
@@ -34,6 +35,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_questions)
 
+        //Todo assign the view id to the variables
         progressBar=findViewById(R.id.progressBar)
         tvProgress = findViewById(R.id.tv_progress)
         tvQuestion = findViewById(R.id.tv_question)
@@ -44,7 +46,9 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionFour = findViewById(R.id.tv_option_four)
         buttonSubmit = findViewById(R.id.btn_submit)
         mQuestionsList = Constants.getQuestions()
+
         setQuestion()
+
         tvOptionOne?.setOnClickListener(this)
         tvOptionTwo?.setOnClickListener(this)
         tvOptionThree?.setOnClickListener(this)

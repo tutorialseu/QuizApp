@@ -1,7 +1,7 @@
 package eu.tutorials.quizapp
 
 object Constants {
-        // TODO (STEP 6: Create a list of questions using the Question data model class. And add all the flag images to the drawable folder to add it in the list.)
+        // TODO Create a list of questions using the Question data model class. And add all the flag images to the drawable folder to add it in the list.
         // START
         fun getQuestions(): ArrayList<Question> {
             val questionsList = ArrayList<Question>()
