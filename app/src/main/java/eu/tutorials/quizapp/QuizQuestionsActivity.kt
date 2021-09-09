@@ -1,5 +1,6 @@
 package eu.tutorials.quizapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 
 class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
+    //create variables for each view in the layout
     private var progressBar:ProgressBar?=null
     private var tvProgress: TextView? = null
     private var tvQuestion:TextView? = null
@@ -20,20 +22,21 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var tvOptionFour:TextView? = null
    private var buttonSubmit:Button? = null
 
-    // TODO (STEP 2: A global variables for current position and questions list.)
-    // START
+
     private var mCurrentPosition: Int = 1 // Default and the first question position
     private var mQuestionsList: ArrayList<Question>? = null
-    // END
-
-    // TODO (STEP 5: A global variables for selected option.)
-    // START
+    private var mCorrectAnswers: Int = 0
+    private var mUserName: String? = null
     private var mSelectedOptionPosition: Int = 0
-    // END
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_questions)
 
+        //Get the NAME from intent and assign it the variable
+        // START
+        mUserName = intent.getStringExtra(Constants.USER_NAME)
+        // END
+        //connect to the view by its id
         progressBar=findViewById(R.id.progressBar)
         tvProgress = findViewById(R.id.tv_progress)
         tvQuestion = findViewById(R.id.tv_question)
@@ -44,7 +47,9 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionFour = findViewById(R.id.tv_option_four)
         buttonSubmit = findViewById(R.id.btn_submit)
         mQuestionsList = Constants.getQuestions()
+
         setQuestion()
+
         tvOptionOne?.setOnClickListener(this)
         tvOptionTwo?.setOnClickListener(this)
         tvOptionThree?.setOnClickListener(this)
@@ -154,8 +159,15 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                             setQuestion()
                         }
                         else -> {
-
-                            Toast.makeText(this@QuizQuestionsActivity, "You have successfully completed the quiz.", Toast.LENGTH_SHORT).show()
+                            // TODO (Now remove the toast message and launch the result screen which we have created and also pass the user name and score details to it.)
+                            // START
+                            val intent =
+                                Intent(this@QuizQuestionsActivity, ResultActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME, mUserName)
+                            intent.putExtra(Constants.CORRECT_ANSWERS, mCorrectAnswers)
+                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList?.size)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 } else {
@@ -164,6 +176,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     // This is to check if the answer is wrong
                     if (question!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }else{
+                        mCorrectAnswers++
                     }
 
                     // This is for correct answer

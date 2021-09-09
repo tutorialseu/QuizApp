@@ -1,8 +1,11 @@
 package eu.tutorials.quizapp
 
 object Constants {
-        // TODO (STEP 6: Create a list of questions using the Question data model class. And add all the flag images to the drawable folder to add it in the list.)
-        // START
+
+    // TODO  Create a constant variables which we required in the result screen
+    const val USER_NAME: String = "user_name"
+    const val TOTAL_QUESTIONS: String = "total_questions"
+    const val CORRECT_ANSWERS: String = "correct_answers"
         fun getQuestions(): ArrayList<Question> {
             val questionsList = ArrayList<Question>()
 

@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/wrong_option_border_bg.xml" value="0.15648148148148147" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_quiz_questions.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_result.xml" value="0.125" />
       </map>
     </option>
   </component>

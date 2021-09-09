@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--TODO (STEP 2: A custom border background for the default options view.)-->
-<!--START-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
@@ -12,4 +10,3 @@
 
     <corners android:radius="5dp" />
 </shape>
-<!--END-->
