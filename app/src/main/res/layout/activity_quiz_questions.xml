@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--TODO (STEP 1: Design the QuizQuestionsActivity layout.)-->
-<!--START-->
-<!--List of the points for to do :
-    1. The custom drawable is added in the drawable folder which used as background.-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
