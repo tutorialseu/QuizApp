@@ -13,13 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <!--TODO (STEP 3: Create a custom theme with no actionbar.)-->
     <style name="NoactionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Todo 6 Hide status bar for window full screen -->
         <item name="android:windowFullscreen">true</item>
     </style>
 </resources>
