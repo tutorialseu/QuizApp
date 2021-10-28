@@ -1,5 +1,6 @@
 package eu.tutorials.quizapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -22,6 +23,10 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var tvOptionThree:TextView? = null
     private var tvOptionFour:TextView? = null
     private var buttonSubmit: Button? = null
+
+    // TODO (STEP 3: Create a variable for getting the name from intent.)
+    // START
+    private var mUserName: String? = null
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
@@ -33,9 +38,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private var mSelectedOptionPosition: Int = 0
-    // END
-    // TODO (STEP 1: Add a variable for calculating the correct answers.)
-    // START
+
     private var mCorrectAnswers: Int = 0
     // END
 
@@ -45,7 +48,10 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         // This is used to align the xml view to this class
         setContentView(R.layout.activity_quiz_questions)
 
-
+        // TODO (STEP 4: Get the NAME from intent and assign it the variable.)
+        // START
+        mUserName = intent.getStringExtra(Constants.USER_NAME)
+        // END
         progressBar=findViewById(R.id.progressBar)
         tvProgress = findViewById(R.id.tv_progress)
         tvQuestion = findViewById(R.id.tv_question)
@@ -140,9 +146,15 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                             setQuestion()
                         }
                         else -> {
-
-                            Toast.makeText(this@QuizQuestionsActivity, "You have successfully completed the quiz. Your Score is : $mCorrectAnswers", Toast.LENGTH_SHORT).show()
-                        }
+                            // TODO (STEP 5: Now remove the toast message and launch the result screen which we have created and also pass the user name and score details to it.)
+                            // START
+                            val intent =
+                                Intent(this@QuizQuestionsActivity, ResultActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME, mUserName)
+                            intent.putExtra(Constants.CORRECT_ANSWERS, mCorrectAnswers)
+                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList?.size)
+                            startActivity(intent)
+                            finish()}
                     }
                 } else {
                     val question = mQuestionsList?.get(mCurrentPosition - 1)
@@ -151,8 +163,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     if (question!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                     }
-                   // TODO (STEP 2: Increase the count of correct answer by 1 if the answer is right.)
-                    // START
                     else {
                         mCorrectAnswers++
                     }

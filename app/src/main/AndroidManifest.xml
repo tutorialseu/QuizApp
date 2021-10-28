@@ -9,8 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizApp">
-        <!--TODO (STEP 4: Modify the activity as per requirement.) -->
-        <!--START-->
         <activity android:name=".ResultActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoactionBar" />
