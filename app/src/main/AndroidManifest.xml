@@ -9,15 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizApp">
-       <activity
-            android:name=".QuizQuestionsActivity"
+        <!--TODO (STEP 4: Modify the activity as per requirement.) -->
+        <!--START-->
+        <activity android:name=".ResultActivity"
             android:screenOrientation="portrait"
-            android:exported="true" />
+            android:theme="@style/NoactionBar" />
+        <activity
+            android:name=".QuizQuestionsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/NoactionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/NoactionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -34,7 +34,10 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mSelectedOptionPosition: Int = 0
     // END
-
+    // TODO (STEP 1: Add a variable for calculating the correct answers.)
+    // START
+    private var mCorrectAnswers: Int = 0
+    // END
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //This call the parent constructor
@@ -63,7 +66,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionThree?.setOnClickListener(this)
         tvOptionFour?.setOnClickListener(this)
 
-        // TODO(STEP 1: Adding a click event for submit button.)
         buttonSubmit?.setOnClickListener (this)
     }
 
@@ -74,8 +76,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
             mQuestionsList!![mCurrentPosition - 1] // Getting the question from the list with the help of current position.
         defaultOptionsView()
 
-        // TODO (STEP 6: Check here if the position of question is last then change the text of the button.)
-        // START
         if (mCurrentPosition == mQuestionsList!!.size) {
             buttonSubmit?.text = "FINISH"
         } else {
@@ -127,8 +127,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
             }
 
-            // TODO(STEP 2: Adding a click event for submit button. And change the questions and check the selected answers.)
-            // START
             R.id.btn_submit->{
 
                 if (mSelectedOptionPosition == 0) {
@@ -143,7 +141,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                         }
                         else -> {
 
-                            Toast.makeText(this@QuizQuestionsActivity, "You have successfully completed the quiz.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@QuizQuestionsActivity, "You have successfully completed the quiz. Your Score is : $mCorrectAnswers", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
@@ -153,7 +151,12 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     if (question!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                     }
-
+                   // TODO (STEP 2: Increase the count of correct answer by 1 if the answer is right.)
+                    // START
+                    else {
+                        mCorrectAnswers++
+                    }
+                    // END
                     // This is for correct answer
                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
 
@@ -169,8 +172,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    // TODO (STEP 3: Create a function for answer view.)
-    // START
     /**
      * A function for answer view which is used to highlight the answer is wrong or right.
      */
