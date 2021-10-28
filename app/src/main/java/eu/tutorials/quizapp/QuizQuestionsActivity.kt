@@ -5,9 +5,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
@@ -23,19 +21,17 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var tvOptionTwo:TextView? = null
     private var tvOptionThree:TextView? = null
     private var tvOptionFour:TextView? = null
+    private var buttonSubmit: Button? = null
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
 
-    // TODO 2 A global variables for current position and questions list.
-    // START
+
     private var mCurrentPosition: Int = 1 // Default and the first question position
     private var mQuestionsList: ArrayList<Question>? = null
     // END
 
 
-    // TODO (STEP 5: A global variables for selected option.)
-    // START
     private var mSelectedOptionPosition: Int = 0
     // END
 
@@ -56,32 +52,36 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionThree = findViewById(R.id.tv_option_three)
         tvOptionFour = findViewById(R.id.tv_option_four)
 
-        // TODO (STEP 3: Make the questions list and the current position variable global and remove the logs here.)
-        // START
+        buttonSubmit = findViewById(R.id.btn_submit)
         mQuestionsList = Constants.getQuestions()
         // END
 
         setQuestion()
 
-        // TODO (STEP 4: Set all the click events for Options using the interface onClick listener)
         tvOptionOne?.setOnClickListener(this)
         tvOptionTwo?.setOnClickListener(this)
         tvOptionThree?.setOnClickListener(this)
         tvOptionFour?.setOnClickListener(this)
+
+        // TODO(STEP 1: Adding a click event for submit button.)
+        buttonSubmit?.setOnClickListener (this)
     }
 
 
-
-    // TODO (STEP 1 : Lets create a function to set the question in the UI components which we have done earlier the onCreate method. And make some of the variables global which we will be using later.)
-    // START
-    /**
-     * A function for setting the question to UI components.
-     */
     private fun setQuestion() {
 
         val question: Question =
             mQuestionsList!![mCurrentPosition - 1] // Getting the question from the list with the help of current position.
+        defaultOptionsView()
 
+        // TODO (STEP 6: Check here if the position of question is last then change the text of the button.)
+        // START
+        if (mCurrentPosition == mQuestionsList!!.size) {
+            buttonSubmit?.text = "FINISH"
+        } else {
+            buttonSubmit?.text = "SUBMIT"
+        }
+        // END
         progressBar?.progress =
             mCurrentPosition // Setting the current progress in the progressbar using the position of question
         tvProgress?.text =
@@ -126,15 +126,85 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
             }
+
+            // TODO(STEP 2: Adding a click event for submit button. And change the questions and check the selected answers.)
+            // START
+            R.id.btn_submit->{
+
+                if (mSelectedOptionPosition == 0) {
+
+                    mCurrentPosition++
+
+                    when {
+
+                        mCurrentPosition <= mQuestionsList!!.size -> {
+
+                            setQuestion()
+                        }
+                        else -> {
+
+                            Toast.makeText(this@QuizQuestionsActivity, "You have successfully completed the quiz.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    val question = mQuestionsList?.get(mCurrentPosition - 1)
+
+                    // This is to check if the answer is wrong
+                    if (question!!.correctAnswer != mSelectedOptionPosition) {
+                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }
+
+                    // This is for correct answer
+                    answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+
+                    if (mCurrentPosition == mQuestionsList!!.size) {
+                        buttonSubmit?.text = "FINISH"
+                    } else {
+                        buttonSubmit?.text = "GO TO NEXT QUESTION"
+                    }
+
+                    mSelectedOptionPosition = 0
+                }
+            }
         }
     }
 
-    // TODO (STEP 6: Create a function for view for highlighting the selected option.)
+    // TODO (STEP 3: Create a function for answer view.)
     // START
-
     /**
-     * A function to set the view of selected option view.
+     * A function for answer view which is used to highlight the answer is wrong or right.
      */
+    private fun answerView(answer: Int, drawableView: Int) {
+
+        when (answer) {
+
+            1 -> {
+                tvOptionOne?.background = ContextCompat.getDrawable(
+                    this@QuizQuestionsActivity,
+                    drawableView
+                )
+            }
+            2 -> {
+                tvOptionTwo?.background = ContextCompat.getDrawable(
+                    this@QuizQuestionsActivity,
+                    drawableView
+                )
+            }
+            3 -> {
+                tvOptionThree?.background = ContextCompat.getDrawable(
+                    this@QuizQuestionsActivity,
+                    drawableView
+                )
+            }
+            4 -> {
+                tvOptionFour?.background = ContextCompat.getDrawable(
+                    this@QuizQuestionsActivity,
+                    drawableView
+                )
+            }
+        }
+    }
+
     private fun selectedOptionView(tv: TextView, selectedOptionNum: Int) {
 
         defaultOptionsView()
@@ -152,11 +222,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    // TODO (STEP 8: Create a function to set default options view.)
-    // START
-    /**
-    * A function to set default options view when the new question is loaded or when the answer is reselected.
-    */
     private fun defaultOptionsView() {
 
         val options = ArrayList<TextView>()
