@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         val buttonStart: Button = findViewById(R.id.btn_start)
         val etName: AppCompatEditText = findViewById(R.id.et_name)
 
-        // TODO (STEP 3: Now validate name is entered or not and launch the QuizQuestion Activity.)
         buttonStart.setOnClickListener {
             if (etName.text.toString().isEmpty()){
                 Toast.makeText(this,"Please Enter Your Name",Toast.LENGTH_SHORT).show()

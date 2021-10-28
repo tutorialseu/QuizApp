@@ -1,7 +1,5 @@
 package eu.tutorials.quizapp
 
-// TODO (STEP 4: Create a Question Data Model Class.)
-// START
 data class Question(
     val id: Int,
     val question: String,
