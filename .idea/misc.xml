@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/QuizApp-1/app/src/main/res/layout/activity_result.xml" value="0.19157608695652173" />
         <entry key="app/src/main/res/drawable/default_option_border_bg.xml" value="0.15648148148148147" />
         <entry key="app/src/main/res/drawable/selected_option_border_bg.xml" value="0.15648148148148147" />
         <entry key="app/src/main/res/drawable/wrong_option_border_bg.xml" value="0.15648148148148147" />

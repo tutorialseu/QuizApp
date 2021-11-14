@@ -117,37 +117,49 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
+
+        val question = mQuestionsList?.get(mCurrentPosition - 1)
+
         when (view?.id) {
 
             R.id.tv_option_one -> {
-            tvOptionOne?.let {
-                selectedOptionView(it, 1)
-            }
+                if(!question?.isQuestionAttempted!!)
+                {
+                    tvOptionOne?.let {
+                    selectedOptionView(it, 1)
+            }}
 
             }
 
             R.id.tv_option_two -> {
-                tvOptionTwo?.let {
+                if(!question?.isQuestionAttempted!!)
+                {
+                    tvOptionTwo?.let {
                     selectedOptionView(it, 2)
-                }
+                }}
 
             }
 
             R.id.tv_option_three -> {
-                tvOptionThree?.let {
+                if(!question?.isQuestionAttempted!!)
+                {
+                    tvOptionThree?.let {
                     selectedOptionView(it, 3)
-                }
+                }}
 
             }
 
             R.id.tv_option_four -> {
-                tvOptionFour?.let {
+                if(!question?.isQuestionAttempted!!)
+                {
+                    tvOptionFour?.let {
                     selectedOptionView(it, 4)
-                }
+                }}
 
             }
             R.id.btn_submit->{
 
+                question?.isQuestionAttempted = true
                 if (mSelectedOptionPosition == 0) {
 
                     mCurrentPosition++
@@ -171,8 +183,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                         }
                     }
                 } else {
-                    val question = mQuestionsList?.get(mCurrentPosition - 1)
-
                     // This is to check if the answer is wrong
                     if (question!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
