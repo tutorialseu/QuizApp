@@ -1,6 +1,6 @@
 package eu.tutorials.quizapp
 
-data class Question(
+public data class Question(
     val id:Int,
     val question:String,
     val image:Int,
@@ -8,5 +8,6 @@ data class Question(
     val optionTwo:String,
     val optionThree:String,
     val optionFour:String,
-    val correctAnswer:Int
+    val correctAnswer:Int,
+    var isQuestionAttempted: Boolean
 )
