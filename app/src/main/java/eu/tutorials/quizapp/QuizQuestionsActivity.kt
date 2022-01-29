@@ -82,6 +82,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
             buttonSubmit?.text = "SUBMIT"
         }
         // END
+        progressBar?.max = mQuestionsList!!.size
         progressBar?.progress =
             mCurrentPosition // Setting the current progress in the progressbar using the position of question
         tvProgress?.text =
